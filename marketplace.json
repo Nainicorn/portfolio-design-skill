@@ -1,0 +1,16 @@
+{
+  "name": "portfolio-designer",
+  "version": "1.0.0",
+  "description": "Build distinctive portfolio websites with 20+ themes, WCAG AA accessibility, and production deployment guides",
+  "author": "Sreenaina Koujala",
+  "repository": "https://github.com/nainicorn/portfolio-designer-skill",
+  "homepage": "https://github.com/nainicorn/portfolio-designer-skill",
+  "license": "MIT",
+  "skills": [
+    {
+      "name": "portfolio-designer",
+      "path": "portfolio-designer",
+      "description": "Create distinctive, customizable portfolio websites using vanilla HTML/CSS/JS. Supports 20+ themes, accessibility validation, and deployment to Vercel/Amplify/GitHub Pages."
+    }
+  ]
+}
