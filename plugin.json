@@ -1,0 +1,17 @@
+{
+  "name": "frontend-design",
+  "version": "1.0.0",
+  "displayName": "Frontend Design",
+  "description": "Create distinctive, production-grade frontend interfaces with high design quality",
+  "author": "Sreenaina Koujala",
+  "license": "MIT",
+  "repository": "https://github.com/nainicorn/portfolio-designer-skill",
+  "main": "plugin.js",
+  "type": "skill",
+  "skills": [
+    {
+      "name": "portfolio-designer",
+      "description": "Create distinctive, customizable portfolio websites using vanilla HTML/CSS/JS. Supports 20+ themes, accessibility validation, and deployment guides."
+    }
+  ]
+}

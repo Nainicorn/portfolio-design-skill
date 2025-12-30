@@ -1,0 +1,32 @@
+{
+  "name": "frontend-design",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Create distinctive, production-grade frontend interfaces with high design quality",
+  "author": "Sreenaina Koujala",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nainicorn/portfolio-designer-skill"
+  },
+  "homepage": "https://github.com/nainicorn/portfolio-designer-skill",
+  "keywords": [
+    "claude",
+    "plugin",
+    "portfolio",
+    "design",
+    "frontend",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "plugin.js",
+  "exports": {
+    ".": {
+      "import": "./plugin.js"
+    }
+  }
+}

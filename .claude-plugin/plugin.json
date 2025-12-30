@@ -1,0 +1,19 @@
+{
+  "name": "portfolio-design",
+  "version": "1.0.0",
+  "displayName": "Portfolio Design",
+  "description": "Create distinctive, customizable portfolio websites using vanilla HTML/CSS/JS. Supports 20+ themes, accessibility validation, and deployment guides.",
+  "author": {
+    "name": "Sreenaina Koujala"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/nainicorn/portfolio-designer-skill",
+  "main": "../plugin.js",
+  "type": "skill",
+  "skills": [
+    {
+      "name": "portfolio-design",
+      "description": "Create distinctive, customizable portfolio websites using vanilla HTML/CSS/JS. Supports 20+ themes, accessibility validation, and deployment guides."
+    }
+  ]
+}
