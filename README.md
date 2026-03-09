@@ -1,151 +1,100 @@
-# Portfolio Designer - Claude AI Skill
+# Unique Design — Claude AI Skill
 
-> Build distinctive, production-ready portfolio websites with Claude AI
+> Build frontend interfaces so distinctive they could never be mistaken for AI-generated.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Skills](https://img.shields.io/badge/Claude-Skills-purple)](https://claude.ai)
 
-A comprehensive Claude AI skill for creating custom portfolio websites using vanilla HTML/CSS/JavaScript. Supports 20+ themes, WCAG AA accessibility, and deployment to major platforms.
+A Claude AI skill for creating truly unique, niche-specific frontend designs. Not templates. Not generic. Every design is shaped by the user's vision, industry, and personality.
 
-## 🎯 What This Skill Does
+## What This Skill Does
 
-Guides users through building custom portfolio websites with:
-- **20+ unique themes** (Modern, Retro, Brutalist, Cyberpunk, Terminal, Comic, etc.)
-- **Accessibility-first** approach (WCAG AA compliance)
-- **No framework bloat** - pure vanilla web technologies
-- **Anti-AI-slop** design principles
-- **Production deployment** guides (Vercel, AWS Amplify, GitHub Pages)
+This skill transforms how Claude builds frontends. Instead of producing generic layouts, it:
 
-## 🚀 Features
+- **Asks deep questions** about your vision, niche, vibe, and preferences before writing a line of code
+- **Adapts to any industry** — healthcare, law, fintech, marine, automotive, AI, gaming, fashion, restaurants, and more
+- **Supports any frontend stack** — vanilla HTML/CSS/JS, React, Next.js, Vue, Svelte
+- **References real creative tools** — ReactBits, Aceternity UI, GSAP, Framer Motion, Magic UI
+- **Creates signature interactions** — garage door reveals, underwater parallax, Bridgerton-themed elegance, terminal boot sequences
+- **Ensures accessibility** — WCAG AA compliance, reduced motion support, keyboard navigation
 
-- **Theme Catalog**: 20+ pre-designed themes with code patterns
-- **Color System**: Smart palette generation with contrast validation
-- **Content Transformation**: Resume → engaging web content
-- **Animation Library**: Vanilla JS animation patterns
-- **Deployment Guides**: Step-by-step for major platforms
-- **Validation Scripts**: HTML semantics & accessibility checks
+## Why This Exists
 
-## 📦 Installation
+Most AI-generated frontends look the same: glass cards, purple gradients, generic sans-serif. Even Claude's built-in frontend skill isn't specific enough for someone who wants a Bridgerton-themed site or a car website that opens like a garage door.
 
-### For Claude.ai (Web/Desktop)
+This skill fixes that by:
+1. **Forcing deep discovery** — asking about vibe, inspiration, niche, animation philosophy before coding
+2. **Providing niche intelligence** — each industry has its own visual language, UX patterns, and anti-patterns
+3. **Referencing real-world inspiration** — Awwwards winners, creative component libraries, not just templates
+4. **Making uniqueness the priority** — the success criteria is "does this look AI-generated?" If yes, redesign
 
-1. Download the [latest release](https://github.com/nainicorn/portfolio-designer-skill/releases) ZIP file
-2. Go to Claude.ai → **Settings** → **Capabilities**
-3. Enable **"Code execution and file creation"**
-4. Click **"Upload skill"** and select the ZIP file
-5. Toggle the skill **ON**
+## Supported Niches
+
+Healthcare, Legal, Fintech, Marine/Ocean, Government, AI/Tech, Automotive, Restaurant, E-Commerce, Fashion, Gaming, Music, Education, Real Estate, Personal Brands — and any other niche the user describes.
+
+## Reference Library
+
+- **[Niche Design Systems](unique-design/references/niche-design-systems.md)** — industry-specific visual languages, patterns, and anti-patterns
+- **[Animation Patterns](unique-design/references/animation-patterns.md)** — multi-stack animation reference (Vanilla, React, GSAP, Framer Motion)
+- **[Color Systems](unique-design/references/color-systems.md)** — niche-specific palettes, mood-based generation, WCAG validation
+- **[Creative Libraries](unique-design/references/creative-libraries-and-patterns.md)** — ReactBits, Aceternity UI, Magic UI, Motion Primitives, GSAP patterns
+- **[Validation Scripts](unique-design/scripts/)** — HTML structure and accessibility checks
+
+## Installation
 
 ### For Claude Code (Terminal)
 
-**Option 1: Plugin Installation (Recommended)**
+**Option 1: Plugin Installation**
 ```bash
-/plugin install https://github.com/nainicorn/portfolio-designer-skill
+/plugin install https://github.com/nainicorn/unique-design-skill
 ```
 
 **Option 2: Manual Installation**
 ```bash
-# Clone the repository
-git clone https://github.com/nainicorn/portfolio-designer-skill.git
-
-# Copy to your Claude Code skills directory
-cp -r portfolio-designer-skill/portfolio-designer ~/.claude/skills/
+git clone https://github.com/nainicorn/unique-design-skill.git
+cp -r unique-design-skill/unique-design ~/.claude/skills/
 ```
 
-**Verify Installation:**
-```bash
-# Check that the skill is loaded
-ls ~/.claude/skills/portfolio-designer
-```
+### For Claude.ai (Web/Desktop)
 
-### For Claude Code
-```bash
-# Clone the repository
-git clone https://github.com/nainicorn/portfolio-designer-skill.git
+1. Download the latest release ZIP
+2. Go to Claude.ai → Settings → Capabilities
+3. Upload the skill ZIP file
+4. Toggle the skill ON
 
-# Copy to your skills directory
-cp -r portfolio-designer-skill/portfolio-designer ~/.claude/skills/
-```
+## Quick Start
 
-## 🎯 Quick Start
+Start a new chat and say something like:
 
-After installing, start a **new chat** in Claude and say:
-```
-"I want to build a portfolio website"
-```
+- "I want to build a healthcare dashboard with calming animations"
+- "Design me a Bridgerton-themed wedding website"
+- "I need a fintech landing page that feels premium and data-driven"
+- "Build me a marine biology portfolio with underwater parallax effects"
+- "Create a car showcase site that opens like a garage door"
 
-Claude will guide you through:
-1. **Theme selection** (20+ options)
-2. **Color palette** generation with accessibility validation
-3. **Content structuring** using a detailed template
-4. **Code generation** with vanilla HTML/CSS/JS
-5. **Deployment setup** for your chosen platform
+Claude will ask you detailed questions about your vision before building anything.
 
-## 🎨 Available Themes
+## Key Principles
 
-### Traditional
-- Modern Minimal
-- Neo-Brutalist
-- Glassmorphic
-- Swiss/International
-- Dark Mode Luxury
+- **No AI Slop** — every design is intentionally crafted, not template-generated
+- **Ask Everything** — deep discovery before any code is written
+- **Niche-Native** — designs feel like they belong in their industry
+- **Multi-Stack** — works with your preferred frontend technology
+- **Accessibility First** — WCAG AA compliance, reduced motion, keyboard navigation
+- **Production Ready** — deployable, performant, maintainable code
 
-### Unique
-- Retro 90s Web
-- Comic Book / Pop Art
-- Terminal / Hacker
-- Cyberpunk / Neon
-- Hand-Drawn / Sketch
-- Art Deco / Gatsby
-- Vaporwave
-- Memphis Design
-- And 12+ more...
+## Technical Stack
 
-## 📚 Documentation
+- **Frontend**: Any — Vanilla HTML/CSS/JS, React, Next.js, Vue, Svelte
+- **Animation**: GSAP, Framer Motion, CSS animations, ReactBits, Aceternity UI
+- **Validation**: Python scripts for accessibility and HTML checks
+- **No Lock-in**: Zero proprietary dependencies
 
-- **[Theme Catalog](references/theme-catalog.md)** - All 20+ themes with code examples
-- **[Color Systems](references/color-systems.md)** - Palette generation & WCAG validation
-- **[Content Format](references/resume-input-format.md)** - Structured resume template
-- **[Animation Patterns](references/animation-patterns.md)** - Vanilla JS animations
-- **[Deployment Guide](references/deployment-guides.md)** - Vercel, Amplify, GitHub Pages
+## License
 
-## ✨ Key Principles
+MIT License — see [LICENSE.txt](unique-design/LICENSE.txt)
 
-- **No AI Slop**: Avoids generic gradients, particle effects, cookie-cutter designs
-- **Accessibility First**: WCAG AA compliance built-in
-- **Performance Optimized**: Fast load times, mobile-responsive
-- **Complete Control**: Users can customize every aspect
-- **Production Ready**: Deployable immediately
-
-## 🛠️ Technical Stack
-
-- **Frontend**: Vanilla HTML5, CSS3, JavaScript (ES6+)
-- **No Frameworks**: Zero dependencies for maximum simplicity
-- **Validation**: Python scripts for quality checks
-- **Deployment**: Multi-platform support (Vercel, AWS Amplify, GitHub Pages)
-
-## 🤝 Contributing
-
-Contributions welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
-
-## 📄 License
-
-MIT License - see [LICENSE.txt](LICENSE.txt)
-
-## 🌟 Why This Skill?
-
-Most AI-generated portfolios look identical. This skill teaches Claude to:
-- Build truly distinctive designs
-- Follow web best practices
-- Respect accessibility standards
-- Provide complete customization
-- Deploy to production platforms
-
-Perfect for developers, designers, and anyone building their professional web presence.
-
-## 📧 Contact
+## Contact
 
 Created by [Sreenaina Koujala](https://github.com/nainicorn)
 - GitHub: [@nainicorn](https://github.com/nainicorn)
@@ -153,4 +102,4 @@ Created by [Sreenaina Koujala](https://github.com/nainicorn)
 
 ---
 
-**Note**: This is a skill for Claude AI, not a standalone application. It provides Claude with specialized knowledge for building portfolio websites.
+**Note**: This is a skill for Claude AI, not a standalone application. It gives Claude specialized knowledge for building unique, niche-specific frontend designs.

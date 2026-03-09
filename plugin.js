@@ -3,10 +3,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const skillDir = path.join(__dirname, 'portfolio-design');
+const skillDir = path.join(__dirname, 'unique-design');
 
 export async function handleSkill(skillName, input) {
-  if (skillName !== 'portfolio-design') {
+  if (skillName !== 'unique-design') {
     throw new Error(`Unknown skill: ${skillName}`);
   }
 
@@ -17,7 +17,7 @@ export async function handleSkill(skillName, input) {
   // Load references
   const references = {};
   const refsDir = path.join(skillDir, 'references');
-  
+
   for (const file of fs.readdirSync(refsDir)) {
     if (file.endsWith('.md')) {
       const name = file.replace('.md', '');
@@ -37,5 +37,5 @@ export async function handleSkill(skillName, input) {
 }
 
 export const config = {
-  skills: ['portfolio-design']
+  skills: ['unique-design']
 };

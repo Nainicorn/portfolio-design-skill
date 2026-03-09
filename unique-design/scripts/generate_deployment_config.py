@@ -71,17 +71,17 @@ jobs:
 
 README_TEMPLATE = """# {project_name}
 
-Personal portfolio website for {author_name}.
+Built by {author_name}.
 
-## 🚀 Deployment
+## Deployment
 
-This portfolio is deployed on {platform}.
+Deployed on {platform}.
 
 ### Local Development
 
 1. Clone this repository
-2. Open `index.html` in your browser
-3. That's it! No build step needed.
+2. Open `index.html` in your browser (or run your framework's dev server)
+3. Make changes and see them live
 
 ### Making Changes
 
@@ -89,47 +89,29 @@ This portfolio is deployed on {platform}.
 2. Commit and push to GitHub
 3. {deploy_note}
 
-## 📁 Structure
-
-```
-portfolio/
-├── index.html              # Main HTML file
-├── css/
-│   ├── reset.css           # CSS reset
-│   ├── variables.css       # Color & spacing variables
-│   ├── base.css            # Base styles
-│   └── theme.css           # Theme-specific styles
-├── js/
-│   ├── main.js             # Core functionality
-│   └── animations.js       # Scroll animations
-├── assets/
-│   └── images/             # Your images
-└── README.md               # This file
-```
-
-## 🎨 Customization
+## Customization
 
 ### Colors
 
-Edit `css/variables.css` to change the color scheme:
+Edit your CSS variables file to change the color scheme:
 
 ```css
 :root {{
-  --color-primary: #0066FF;
-  --color-accent: #FF9500;
+  --color-primary: #VALUE;
+  --color-accent: #VALUE;
   /* ... more colors */
 }}
 ```
 
 ### Content
 
-Update `index.html` with your information, projects, and experience.
+Update your HTML/components with your content.
 
 ### Styling
 
-Add theme-specific styles in `css/theme.css`.
+Modify your theme-specific styles to customize the design.
 
-## 📝 License
+## License
 
 © {year} {author_name}. All rights reserved.
 """
@@ -249,7 +231,7 @@ if __name__ == "__main__":
     
     platform = sys.argv[1]
     output_dir = sys.argv[2] if len(sys.argv) > 2 else '.'
-    project_name = sys.argv[3] if len(sys.argv) > 3 else 'Portfolio'
+    project_name = sys.argv[3] if len(sys.argv) > 3 else 'My Project'
     author_name = sys.argv[4] if len(sys.argv) > 4 else 'Your Name'
     
     success = generate_configs(platform, output_dir, project_name, author_name)

@@ -1,19 +1,19 @@
 {
-  "name": "portfolio-design",
-  "version": "1.0.0",
-  "displayName": "Portfolio Design",
-  "description": "Create distinctive, customizable portfolio websites using vanilla HTML/CSS/JS. Supports 20+ themes, accessibility validation, and deployment guides.",
+  "name": "unique-design",
+  "version": "2.0.0",
+  "displayName": "Unique Design",
+  "description": "Create truly unique, niche-specific frontend designs for any industry. Supports any frontend stack with creative animations and intentional UX.",
   "author": {
     "name": "Sreenaina Koujala"
   },
   "license": "MIT",
-  "repository": "https://github.com/nainicorn/portfolio-designer-skill",
+  "repository": "https://github.com/nainicorn/unique-design-skill",
   "main": "../plugin.js",
   "type": "skill",
   "skills": [
     {
-      "name": "portfolio-design",
-      "description": "Create distinctive, customizable portfolio websites using vanilla HTML/CSS/JS. Supports 20+ themes, accessibility validation, and deployment guides."
+      "name": "unique-design",
+      "description": "Create truly unique, niche-specific frontend designs for any industry — healthcare, law, fintech, marine, automotive, AI, gaming, and more. Supports vanilla JS, React, Vue, Svelte, Next.js. Uses creative animations from GSAP, Framer Motion, ReactBits, Aceternity UI."
     }
   ]
 }
