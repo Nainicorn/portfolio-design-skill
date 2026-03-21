@@ -6,7 +6,6 @@ description: >
   design system generated from 3 intake questions, and native CSS nesting enforced
   via LSP. Use when the user wants to build a clean, minimal-dependency frontend
   from scratch without a framework.
-allowed-tools: Bash(npm *), Bash(node *), Bash(python *)
 ---
 
 # vanilla-scaffold
@@ -20,39 +19,38 @@ allowed-tools: Bash(npm *), Bash(node *), Bash(python *)
 
 ### Phase 1: Context Intake (3 questions, no more)
 
-Ask the user exactly these three questions before doing anything else:
+Use the `AskUserQuestion` tool to present all 3 questions as interactive selections in a single call.
+Do not use plain text for these questions — always use the tool so the user gets clickable options.
+The user can always select "Other" (added automatically) to describe something custom.
 
-```
-1. What are you building?
-   [ ] Portfolio / personal site
-   [ ] SaaS dashboard
-   [ ] Internal tool
-   [ ] Fintech / data app
-   [ ] Marketing / landing page
-   [ ] Developer tool
-   [ ] E-commerce
-   [ ] Other (describe)
+Questions to ask (all in one AskUserQuestion call):
 
-2. What's the vibe?
-   [ ] Editorial / dark editorial
-   [ ] Brutalist / raw
-   [ ] Glassy / premium
-   [ ] Corporate clean
-   [ ] Playful / expressive
-   [ ] Retro-tech / terminal
-   [ ] GovTech / neutral
-   [ ] Undecided / Custom (I'll decide for you)
+**Question 1 — "What are you building?"**
+Header: `App type`
+Options (pick 4, "Other" is automatic):
+- **Portfolio / personal site** — "Showcase work, bio, case studies, or projects"
+- **SaaS / dashboard** — "Data-driven interface with panels, controls, and navigation"
+- **Fintech / data app** — "Financial data, charts, transactions, or analytics"
+- **Marketing / landing page** — "Conversion-focused brand storytelling or product launch"
 
-3. Do you want motion or 3D?
-   [ ] None — plain CSS transitions only
-   [ ] Subtle CSS transitions
-   [ ] GSAP (scroll-driven reveals)
-   [ ] Three.js animations (hero / background)
-   [ ] Library for component micro-interactions
-   [ ] Extra libraries for transitions/animations/structure/etc.
-```
+**Question 2 — "What's the vibe?"**
+Header: `Vibe`
+Options (pick 4, "Other" is automatic):
+- **Dark editorial** — "High contrast, bold typography, magazine-like layouts"
+- **Brutalist / raw** — "Exposed structure, monospace, anti-design aesthetic"
+- **Glassy / premium** — "Frosted glass, soft gradients, luxury feel"
+- **Playful / expressive** — "Bold colors, organic shapes, personality-driven"
 
-Do not proceed until all three questions are answered.
+**Question 3 — "Do you want motion or 3D?"**
+Header: `Motion`
+Options (pick 4, "Other" is automatic):
+- **None** — "Plain CSS transitions only, no external libraries"
+- **GSAP** — "Scroll-driven reveals and timeline animations"
+- **Three.js** — "3D hero scenes or animated backgrounds"
+- **Multiple libraries** — "GSAP + micro-interactions + extras"
+
+After the user answers all 3, ask for the **app name** in a follow-up text message.
+Do not proceed to Phase 2 until all 3 selections + app name are collected.
 
 ---
 
