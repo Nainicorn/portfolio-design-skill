@@ -44,8 +44,31 @@ Options (pick 4, "Other" is automatic):
 - **Three.js** — "3D hero scenes or animated backgrounds"
 - **Multiple libraries** — "GSAP + micro-interactions + extras"
 
-After the user answers all 3, ask for the **app name** in a follow-up text message.
-Do not proceed to Phase 2 until all 3 selections + app name are collected.
+After the user answers all 3, use a **second AskUserQuestion** call to ask:
+
+**Question 4 — "Anything else I should know?"**
+Header: `Context`
+Options:
+- **I have a CLAUDE.md** — "Read my project's CLAUDE.md for additional context and constraints"
+- **I'll describe it** — "Let me give you more detail about what I need"
+- **Nope, that's it** — "Proceed with what you have"
+
+If the user selects "I have a CLAUDE.md", read it before proceeding.
+If the user selects "I'll describe it", wait for their input.
+
+Then ask for the **app name** in a follow-up text message.
+Do not proceed to Phase 2 until all selections + any extra context + app name are collected.
+
+### Phase 1.5: Domain Research (required before Phase 2)
+
+Before generating the design doc, **research the user's specific domain**.
+Use web search to look up real apps in the user's space (fintech, space tech, crim tech, health tech, etc.) and study:
+- What UI patterns are standard in that industry
+- What visual language users of those apps expect
+- What makes the best apps in that niche feel professional
+
+This research informs every design decision in Phase 2. The design doc should feel like it was made by someone who understands the domain, not a generic template.
+Be concise — research is for informing decisions, not for showing the user what you found.
 
 ---
 
@@ -154,12 +177,20 @@ After generation, run LSP validation on all .css files. Fix any violations befor
 12. Render functions are synchronous. Data fetching is a service concern.
 13. Motion library init lives in `src/lib/`. Components never import libraries directly.
 
+### UI Quality
+14. Zero rogue margins or padding. The base reset kills all browser defaults — if spacing appears, it was intentional via tokens.
+15. Every element is explicitly spaced with spacing tokens. No magic numbers, no "looks about right" — use `--space-*` variables.
+16. Alignment is pixel-perfect. Headers align with body content. Grid items align with each other. Nothing floats randomly.
+17. Typography hierarchy is visually obvious. Display → heading → body → caption must have clear size and weight contrast.
+18. Interactive elements (buttons, links, inputs) have visible focus states, hover states, and adequate touch targets (min 44px).
+19. Layout fills the viewport cleanly — no orphaned whitespace at the bottom, no horizontal overflow, no content that stops mid-screen.
+
 ### Developer Experience
-14. Every script is idempotent. Running setup twice must not break anything.
-15. Every error message includes what failed AND what to do next. No silent failures.
-16. Scaffold output is `npm install && npm run dev` runnable with zero extra steps.
-17. Generated comments explain *why*, not *what*. Architecture over annotation.
-18. Escape hatches are documented. If a user wants to deviate, they know exactly where.
+20. Every script is idempotent. Running setup twice must not break anything.
+21. Every error message includes what failed AND what to do next. No silent failures.
+22. Scaffold output is `npm install && npm run dev` runnable with zero extra steps.
+23. Generated comments explain *why*, not *what*. Architecture over annotation.
+24. Escape hatches are documented. If a user wants to deviate, they know exactly where.
 
 ---
 

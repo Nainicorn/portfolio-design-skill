@@ -83,6 +83,24 @@ Base unit: 4px. Scale defined as custom properties:
 
 Components use spacing tokens exclusively. No magic numbers.
 
+### Spacing Rules (enforced)
+- Every margin and padding must use a `--space-*` token. No `12px`, no `1.5em`, no arbitrary values.
+- Consistent section spacing: use `--space-12` or `--space-16` between major sections, `--space-4` to `--space-6` within components.
+- Padding on containers must be symmetric unless the design intentionally breaks symmetry.
+- No element should rely on browser-default margins. The global reset strips them — re-add intentionally or not at all.
+
+### Alignment Rules (enforced)
+- Page content must have a consistent horizontal gutter (e.g., `--space-6` or `--space-8` on body/main containers).
+- Header content, body content, and footer content must share the same horizontal alignment — left edges line up.
+- Grid and flex gaps use spacing tokens. No unitless or arbitrary gap values.
+- Vertically, no orphaned whitespace. Footer hugs the bottom of content or viewport (whichever is taller).
+
+### Interactive Element Rules
+- Buttons: min-height 44px, horizontal padding `--space-4` to `--space-6`, visible hover + focus states.
+- Inputs: same height as buttons, consistent border radius, clear focus ring using `--color-accent`.
+- Links: distinguishable from body text via color or underline. Hover state required.
+- Touch targets: minimum 44x44px for any clickable/tappable element.
+
 ---
 
 ## Layout Patterns
