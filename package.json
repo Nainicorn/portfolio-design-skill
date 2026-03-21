@@ -7,7 +7,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nainicorn/ui-kit"
+    "url": "https://github.com/nainicorn/vanilla-scaffold"
   },
   "keywords": [
     "claude-code",

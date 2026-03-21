@@ -18,7 +18,7 @@ bash ~/.claude/skills/vanilla-scaffold/scripts/setup.sh
 
 Or install as a plugin:
 ```
-/plugin install nainicorn/ui-kit
+/install nainicorn/vanilla-scaffold
 ```
 
 ---

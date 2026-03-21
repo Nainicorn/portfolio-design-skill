@@ -7,7 +7,7 @@
     "name": "Sreenaina Koujala"
   },
   "license": "MIT",
-  "repository": "https://github.com/nainicorn/ui-kit",
+  "repository": "https://github.com/nainicorn/vanilla-scaffold",
   "main": "../plugin.js",
   "type": "skill",
   "skills": [
