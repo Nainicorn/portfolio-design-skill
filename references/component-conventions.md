@@ -8,28 +8,26 @@ Every component follows the same three-file pattern. No exceptions.
 
 ```
 components/
-  layout/
-    Layout/
-      Layout.hbs    ← shell markup
-      Layout.js     ← imports + renders child components
-      Layout.css    ← shell styles
-    Header/
-      Header.hbs    ← markup only, no logic
-      Header.js     ← import/export, event binding, Handlebars compile
-      Header.css    ← scoped styles, native nesting only
-    Body/
-      Body.hbs
-      Body.js
-      Body.css
-    Footer/
-      Footer.hbs
-      Footer.js
-      Footer.css
-  features/
-    [FeatureName]/
-      [FeatureName].hbs
-      [FeatureName].js
-      [FeatureName].css
+  Layout/
+    Layout.hbs    ← shell markup
+    Layout.js     ← imports + renders child components
+    Layout.css    ← shell styles
+  Header/
+    Header.hbs    ← markup only, no logic
+    Header.js     ← import/export, event binding, Handlebars compile
+    Header.css    ← scoped styles, native nesting only
+  Body/
+    Body.hbs
+    Body.js
+    Body.css
+  Footer/
+    Footer.hbs
+    Footer.js
+    Footer.css
+  [FeatureName]/
+    [FeatureName].hbs
+    [FeatureName].js
+    [FeatureName].css
 ```
 
 ---
@@ -166,7 +164,7 @@ export function renderLayout(root, context = {}) {
 // Application entry point — mounts the Layout shell into #app.
 // Data fetching and service init happens here before render.
 
-import { renderLayout } from './components/layout/Layout/Layout.js';
+import { renderLayout } from './components/Layout/Layout.js';
 
 const root = document.getElementById('app');
 renderLayout(root, { title: 'App Name' });
@@ -190,7 +188,7 @@ renderLayout(root, { title: 'App Name' });
 ## Adding a Feature Component
 
 ```
-1. Create: src/components/features/YourFeature/
+1. Create: src/components/YourFeature/
 2. Add:    YourFeature.hbs / YourFeature.js / YourFeature.css
 3. Import + call from Body.js
 4. Add a mount slot in Body.hbs

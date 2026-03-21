@@ -1,11 +1,6 @@
 ---
 name: vanilla-scaffold
-description: >
-  Scaffold a vanilla JS + Handlebars + Native CSS frontend using a layout-first
-  architecture with per-component file separation (.hbs/.js/.css), an opinionated
-  design system generated from 3 intake questions, and native CSS nesting enforced
-  via LSP. Use when the user wants to build a clean, minimal-dependency frontend
-  from scratch without a framework.
+description: "Scaffold a vanilla JS + Handlebars + Native CSS frontend using a layout-first architecture with per-component file separation (.hbs/.js/.css), an opinionated design system generated from 3 intake questions, and native CSS nesting enforced via LSP."
 ---
 
 # vanilla-scaffold
@@ -113,7 +108,7 @@ Silence, a slow response, or an unrelated message is not confirmation.
 Run `scripts/scaffold.py` with the app name as argument. Then generate all component files per `references/component-conventions.md`.
 
 The scaffold script must:
-- Print each file as it's created (`✓ Created src/components/layout/Header/Header.js`)
+- Print each file as it's created (`✓ Created src/components/Header/Header.js`)
 - Exit with a clear error if the target directory already exists — tell the user to pass `--force` or pick a new name
 - End with a runnable summary:
 
@@ -126,15 +121,15 @@ To get started:
   npm run dev
 
 Your app opens at http://localhost:5173
-Edit src/components/features/ to build your first page.
+Edit src/components/ to build your first page.
 ```
 
 After generation, run LSP validation on all .css files. Fix any violations before declaring done:
 
 ```
 ⚠️  LSP found [N] CSS issues — fixing before handoff:
-  src/components/layout/Header/Header.css:14 — flat selector detected
-  src/components/features/MainPage/MainPage.css:8 — hardcoded color value
+  src/components/Header/Header.css:14 — flat selector detected
+  src/components/MainPage/MainPage.css:8 — hardcoded color value
 ✓  Fixed. All CSS passes LSP validation.
 ```
 

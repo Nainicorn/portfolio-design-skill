@@ -106,7 +106,7 @@ def get_file_tree(app_name):
             content = read_template(filename)
             if content:
                 files.append((
-                    f"src/components/layout/{comp}/{filename}",
+                    f"src/components/{comp}/{filename}",
                     substitute(content, app_name)
                 ))
 
@@ -116,9 +116,9 @@ def get_file_tree(app_name):
         if content:
             files.append((f"src/services/{service}", content))
 
-    # --- Feature placeholder ---
+    # --- Placeholder for new components ---
     files.append((
-        "src/components/features/.gitkeep",
+        "src/components/.gitkeep",
         ""
     ))
 
@@ -171,7 +171,7 @@ def main():
     print("  npm run dev")
     print("")
     print("Your app opens at http://localhost:5173")
-    print("Edit src/components/features/ to build your first page.")
+    print("Add new components under src/components/ to build your first page.")
     print("")
 
 

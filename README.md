@@ -63,12 +63,11 @@ your-app/
 │   ├── styles/
 │   │   └── base.css              ← design tokens
 │   ├── components/
-│   │   ├── layout/
-│   │   │   ├── Layout/           ← shell (Header + Body + Footer)
-│   │   │   ├── Header/           ← .hbs + .js + .css
-│   │   │   ├── Body/
-│   │   │   └── Footer/
-│   │   └── features/             ← your components go here
+│   │   ├── Layout/               ← shell (Header + Body + Footer)
+│   │   ├── Header/               ← .hbs + .js + .css
+│   │   ├── Body/
+│   │   ├── Footer/
+│   │   └── YourFeature/          ← your components go here
 │   ├── services/
 │   │   ├── apiService.js         ← fetch wrapper, any backend
 │   │   └── routeService.js       ← hash-based routing
@@ -104,7 +103,7 @@ Every component = 3 files: `.hbs` (markup) + `.js` (logic) + `.css` (styles). No
 ## Adding a Feature Component
 
 ```
-1. Create: src/components/features/YourFeature/
+1. Create: src/components/YourFeature/
 2. Add:    YourFeature.hbs / YourFeature.js / YourFeature.css
 3. Import + call from Body.js
 4. Add a mount slot in Body.hbs
