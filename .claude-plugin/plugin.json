@@ -1,0 +1,19 @@
+{
+  "name": "vanilla-scaffold",
+  "version": "1.0.0",
+  "displayName": "Vanilla Scaffold",
+  "description": "Scaffold a vanilla JS + Handlebars + Native CSS frontend using a layout-first architecture with per-component file separation, an opinionated design system, and native CSS nesting enforced via LSP.",
+  "author": {
+    "name": "Sreenaina Koujala"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/nainicorn/ui-kit",
+  "main": "../plugin.js",
+  "type": "skill",
+  "skills": [
+    {
+      "name": "vanilla-scaffold",
+      "description": "Scaffold a vanilla JS + Handlebars + Native CSS frontend using a layout-first architecture with per-component file separation (.hbs/.js/.css), an opinionated design system generated from 3 intake questions, and native CSS nesting enforced via LSP."
+    }
+  ]
+}

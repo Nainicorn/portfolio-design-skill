@@ -1,0 +1,38 @@
+/* Body.css */
+/* Main content area styles. Features rendered inside Body manage their own styles.
+   Native CSS nesting throughout. All values via custom properties from base.css. */
+
+.body {
+  padding: var(--space-8) var(--space-6);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+
+  & .body__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  & .body__title {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  & .body__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-muted);
+    max-width: 60ch;
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-4) var(--space-4);
+
+    & .body__title {
+      font-size: var(--text-2xl);
+    }
+  }
+}

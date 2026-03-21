@@ -1,0 +1,14 @@
+{{! Header.hbs }}
+{{! Receives: { title, navItems } from Layout.js context.
+    navItems shape: [{ href: "/about", label: "About" }] }}
+<nav class="header">
+  <a class="header__logo" href="#">{{title}}</a>
+  <ul class="header__nav">
+    {{#each navItems}}
+      <li><a href="{{this.href}}">{{this.label}}</a></li>
+    {{/each}}
+  </ul>
+  <button class="header__menu-toggle" aria-label="Toggle menu">
+    <span class="material-icons">menu</span>
+  </button>
+</nav>

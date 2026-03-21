@@ -1,0 +1,22 @@
+/* Layout.css */
+/* Root layout shell — defines the page-level flex column structure.
+   Header and Footer are fixed-height, Body fills remaining space.
+   Native CSS nesting throughout. All values via custom properties from base.css. */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  & #header {
+    flex-shrink: 0;
+  }
+
+  & #body {
+    flex: 1;
+  }
+
+  & #footer {
+    flex-shrink: 0;
+  }
+}

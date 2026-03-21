@@ -1,0 +1,61 @@
+/* base.css */
+/* Global design tokens and reset. All component styles consume these tokens.
+   To change the design: update token values here — never hardcode in components.
+   Font families are populated from the design decision doc (Phase 2). */
+
+:root {
+  /* Typography — font families set per project in Phase 2 */
+  --font-display: system-ui, sans-serif;
+  --font-body: system-ui, sans-serif;
+
+  /* Typography Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  /* Spacing (base 4px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Colors — filled in from design decision doc (Phase 2) */
+  --color-primary: ;
+  --color-surface: ;
+  --color-accent: ;
+  --color-muted: ;
+  --color-error: ;
+  --color-text: ;
+  --color-bg: ;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,19 @@
+{
+  "lspServers": {
+    "css": {
+      "command": "vscode-css-language-server",
+      "args": ["--stdio"],
+      "extensionToLanguage": {
+        ".css": "css"
+      }
+    },
+    "html": {
+      "command": "vscode-html-language-server",
+      "args": ["--stdio"],
+      "extensionToLanguage": {
+        ".hbs": "html",
+        ".html": "html"
+      }
+    }
+  }
+}
