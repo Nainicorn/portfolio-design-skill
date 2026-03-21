@@ -8,17 +8,16 @@
 
 ## Install
 
+In Claude Code, run:
+```
+/plugin marketplace add nainicorn/vanilla-scaffold
+/plugin install vanilla-scaffold
+```
+
+Or install locally:
 ```bash
-# Copy to Claude Code skills directory
-cp -r vanilla-scaffold ~/.claude/skills/
-
-# Run setup (installs LSP, checks Node version)
+git clone https://github.com/nainicorn/vanilla-scaffold.git ~/.claude/skills/vanilla-scaffold
 bash ~/.claude/skills/vanilla-scaffold/scripts/setup.sh
-```
-
-Or install as a plugin:
-```
-/install nainicorn/vanilla-scaffold
 ```
 
 ---
