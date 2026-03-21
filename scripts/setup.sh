@@ -16,8 +16,13 @@ fi
 
 if ! command -v vscode-css-language-server &> /dev/null; then
   echo "→  Installing vscode-langservers-extracted (CSS + HTML LSP)..."
-  npm install -g vscode-langservers-extracted
-  echo "✓  LSP installed"
+  if npm install -g vscode-langservers-extracted 2>/dev/null; then
+    echo "✓  LSP installed"
+  else
+    echo "⚠️  Global install failed (permission denied). Retrying with sudo..."
+    sudo npm install -g vscode-langservers-extracted
+    echo "✓  LSP installed"
+  fi
 else
   echo "✓  CSS LSP already installed — skipping"
 fi
