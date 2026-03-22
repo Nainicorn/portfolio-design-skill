@@ -110,19 +110,27 @@ def get_file_tree(app_name):
                     substitute(content, app_name)
                 ))
 
+    # --- Framework ---
+    framework_files = [
+        "framework/messages/messages.js",
+        "framework/scheme/scheme.js",
+        "framework/scheme/scheme.css",
+        "framework/modal/modal.js",
+        "framework/modal/modal.hbs",
+        "framework/modal/modal.css",
+    ]
+    for fw_file in framework_files:
+        content = read_template(fw_file)
+        if content:
+            files.append((f"src/{fw_file}", content))
+
     # --- Services ---
     for service in ["apiService.js", "routeService.js"]:
         content = read_template(f"services/{service}")
         if content:
             files.append((f"src/services/{service}", content))
 
-    # --- Placeholder for new components ---
-    files.append((
-        "src/components/.gitkeep",
-        ""
-    ))
-
-    # --- src/lib placeholder ---
+    # --- src/lib placeholder (motion library init goes here) ---
     files.append((
         "src/lib/.gitkeep",
         ""

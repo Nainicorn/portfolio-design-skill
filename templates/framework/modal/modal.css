@@ -1,0 +1,55 @@
+/* modal.css */
+/* Reusable modal — backdrop + centered panel. Hidden by default,
+   shown when .__modal--open is added. All spacing via tokens. */
+
+.__modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+
+  &.__modal--open {
+    display: flex;
+  }
+}
+
+.__modal {
+  background: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+
+  .__modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--border-color);
+
+    .__modal-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+    }
+
+    .__modal-close {
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: var(--text-xl);
+
+      &:hover {
+        color: var(--text-color);
+      }
+    }
+  }
+
+  .__modal-body {
+    padding: var(--space-6);
+  }
+}

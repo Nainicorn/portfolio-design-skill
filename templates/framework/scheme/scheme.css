@@ -1,0 +1,47 @@
+/* scheme.css */
+/* HSL-based color system — all colors derived from three root variables.
+   To create a new theme: add a body[data-theme="name"] block with new hue/saturation.
+   Dark/light is handled by data-scheme, themes by data-theme. They compose. */
+
+body {
+  --hue: 220;
+  --saturation: 10%;
+  --lightness: 15%;
+
+  --primary-bg: hsl(var(--hue) var(--saturation) var(--lightness));
+  --secondary-bg: hsl(var(--hue) var(--saturation) calc(var(--lightness) + 5%));
+  --tertiary-bg: hsl(var(--hue) var(--saturation) calc(var(--lightness) + 10%));
+  --border-color: hsl(var(--hue) var(--saturation) calc(var(--lightness) + 15%));
+  --text-color: hsl(0 0% calc(var(--lightness) + 75%));
+  --text-muted: hsl(0 0% calc(var(--lightness) + 45%));
+  --accent-color: hsl(var(--hue) 60% 50%);
+  --accent-hover: hsl(var(--hue) 60% 40%);
+  --error-color: hsl(0 70% 50%);
+
+  /* Light scheme — invert the lightness math */
+  &[data-scheme="light"] {
+    --lightness: 95%;
+    --primary-bg: hsl(var(--hue) var(--saturation) var(--lightness));
+    --secondary-bg: hsl(var(--hue) var(--saturation) calc(var(--lightness) - 5%));
+    --tertiary-bg: hsl(var(--hue) var(--saturation) calc(var(--lightness) - 10%));
+    --border-color: hsl(var(--hue) var(--saturation) calc(var(--lightness) - 15%));
+    --text-color: hsl(0 0% calc(var(--lightness) - 75%));
+    --text-muted: hsl(0 0% calc(var(--lightness) - 45%));
+  }
+
+  /* Custom themes — override hue + saturation, scheme handles the rest */
+  &[data-theme="ocean"] {
+    --hue: 200;
+    --saturation: 25%;
+  }
+
+  &[data-theme="forest"] {
+    --hue: 150;
+    --saturation: 20%;
+  }
+
+  &[data-theme="sunset"] {
+    --hue: 20;
+    --saturation: 30%;
+  }
+}

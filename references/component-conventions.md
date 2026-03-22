@@ -1,71 +1,63 @@
 # Component Conventions — vanilla-scaffold Reference
 
 Every component follows the same three-file pattern. No exceptions.
+All components live flat under `src/components/` — no `layout/` or `features/` subdirs.
 
 ---
 
 ## File Structure
 
 ```
-components/
-  Layout/
-    Layout.hbs    ← shell markup
-    Layout.js     ← imports + renders child components
-    Layout.css    ← shell styles
-  Header/
-    Header.hbs    ← markup only, no logic
-    Header.js     ← import/export, event binding, Handlebars compile
-    Header.css    ← scoped styles, native nesting only
-  Body/
-    Body.hbs
-    Body.js
-    Body.css
-  Footer/
-    Footer.hbs
-    Footer.js
-    Footer.css
-  [FeatureName]/
-    [FeatureName].hbs
-    [FeatureName].js
-    [FeatureName].css
+src/
+├── app.js                      ← entry point, inits framework + mounts Layout
+├── styles/
+│   └── base.css                ← reset, typography, spacing tokens
+├── framework/
+│   ├── messages/
+│   │   └── messages.js         ← BroadcastChannel pub/sub
+│   ├── scheme/
+│   │   ├── scheme.js           ← dark/light/system + custom themes
+│   │   └── scheme.css          ← HSL-derived color system
+│   └── modal/
+│       ├── modal.js            ← reusable modal (open/close/escape)
+│       ├── modal.hbs
+│       └── modal.css
+├── components/                  ← FLAT — all components at same level
+│   ├── Layout/
+│   │   ├── Layout.hbs
+│   │   ├── Layout.js
+│   │   └── Layout.css
+│   ├── Header/
+│   │   ├── Header.hbs
+│   │   ├── Header.js
+│   │   └── Header.css
+│   ├── Body/
+│   │   ├── Body.hbs
+│   │   ├── Body.js
+│   │   └── Body.css
+│   ├── Footer/
+│   │   ├── Footer.hbs
+│   │   ├── Footer.js
+│   │   └── Footer.css
+│   └── [YourFeature]/
+│       ├── [YourFeature].hbs
+│       ├── [YourFeature].js
+│       └── [YourFeature].css
+├── services/
+│   ├── apiService.js            ← fetch wrapper + streaming
+│   └── routeService.js          ← hash-based routing
+└── lib/                         ← motion library init (if selected)
 ```
 
 ---
 
-## File Roles
-
-### `.hbs` — Markup Only
-- Pure Handlebars template
-- No logic, no helpers, no inline styles
-- Documents its expected context in a comment at the top
-- Uses semantic HTML elements
-
-```hbs
-{{! Header.hbs }}
-{{! Receives: { title, navItems } from Layout.js context }}
-<nav class="header">
-  <a class="header__logo" href="#">{{title}}</a>
-  <ul class="header__nav">
-    {{#each navItems}}
-      <li><a href="{{this.href}}">{{this.label}}</a></li>
-    {{/each}}
-  </ul>
-</nav>
-```
-
-### `.js` — Logic + Binding
-- Imports Handlebars, compiles the template
-- Uses `?raw` on `.hbs` imports (required for Vite)
-- Named export only (`export function render[Component]`)
-- Render function is synchronous
-- All `querySelector` calls scoped to `container` argument
-- Self-documenting header comment
+## Component JS Pattern
 
 ```js
 // Header.js
 // Layout component — rendered once per page load, owns nav and branding.
 // To add nav links: update Header.hbs and pass { navItems: [...] } from Layout.js
-// To restyle: edit Header.css — all tokens defined in src/styles/base.css
+// To restyle: edit Header.css — color tokens in scheme.css, spacing in base.css
 
 import Handlebars from 'handlebars';
 import template from './Header.hbs?raw';
@@ -83,43 +75,44 @@ function bindEvents(container) {
 }
 ```
 
-### `.css` — Scoped Styles
-- Native CSS nesting throughout
-- All values via custom properties from `base.css`
-- Never styles children from other components
-- Self-documenting header comment
+---
+
+## Component CSS Pattern
+
+Uses double-underscore prefix for component scoping (matches wovenAI convention).
+All colors from scheme.css variables, spacing from base.css tokens.
 
 ```css
 /* Header.css */
-/* Scoped to .header — do not style children from other components here.
-   Native CSS nesting throughout. All values via custom properties from base.css. */
+/* Scoped to .__header — native CSS nesting throughout.
+   Colors via scheme.css (--primary-bg, --text-color, etc).
+   Spacing via base.css (--space-*, --text-*). */
 
-.header {
+.__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: var(--space-4) var(--space-6);
-  background: var(--color-surface);
+  background: var(--secondary-bg);
+  border-bottom: 1px solid var(--border-color);
 
-  & .header__logo {
+  .__header-logo {
     font-family: var(--font-display);
     font-size: var(--text-xl);
-    color: var(--color-text);
-    text-decoration: none;
+    color: var(--text-color);
+    cursor: pointer;
   }
 
-  & .header__nav {
+  .__header-nav {
     display: flex;
     gap: var(--space-4);
-    list-style: none;
 
-    & a {
-      color: var(--color-text);
-      text-decoration: none;
+    a {
+      color: var(--text-muted);
       font-size: var(--text-sm);
 
       &:hover {
-        color: var(--color-accent);
+        color: var(--accent-color);
       }
     }
   }
@@ -128,22 +121,39 @@ function bindEvents(container) {
 
 ---
 
+## Component HBS Pattern
+
+```hbs
+{{! Header.hbs }}
+{{! Receives: { title, navItems } from Layout.js context }}
+<nav class="__header">
+  <span class="__header-logo">{{title}}</span>
+  <div class="__header-nav">
+    {{#each navItems}}
+      <a href="{{this.href}}">{{this.label}}</a>
+    {{/each}}
+  </div>
+</nav>
+```
+
+---
+
 ## Layout.js — The Shell Owner
 
-Layout.js is special: it renders the page shell and calls all layout children.
+Layout renders the page shell and calls all child components.
+Uses path aliases for imports.
 
 ```js
 // Layout.js
 // Root shell — renders Header, Body, Footer in a fixed page structure.
-// Feature components are rendered inside Body, not here.
-// To change page structure: edit the innerHTML template below.
+// Feature components render inside Body, not here.
 
 import Handlebars from 'handlebars';
 import template from './Layout.hbs?raw';
 import './Layout.css';
-import { renderHeader } from '../Header/Header.js';
-import { renderBody }   from '../Body/Body.js';
-import { renderFooter } from '../Footer/Footer.js';
+import { renderHeader } from '@components/Header/Header.js';
+import { renderBody }   from '@components/Body/Body.js';
+import { renderFooter } from '@components/Footer/Footer.js';
 
 const compiledTemplate = Handlebars.compile(template);
 
@@ -161,10 +171,16 @@ export function renderLayout(root, context = {}) {
 
 ```js
 // app.js
-// Application entry point — mounts the Layout shell into #app.
-// Data fetching and service init happens here before render.
+// Initializes framework (scheme, messages, modal), then mounts Layout.
 
-import { renderLayout } from './components/Layout/Layout.js';
+import scheme from '@framework/scheme/scheme';
+import messages from '@framework/messages/messages';
+import modal from '@framework/modal/modal';
+import { renderLayout } from '@components/Layout/Layout.js';
+
+scheme.init();
+messages.init();
+modal.init();
 
 const root = document.getElementById('app');
 renderLayout(root, { title: 'App Name' });
@@ -172,16 +188,54 @@ renderLayout(root, { title: 'App Name' });
 
 ---
 
+## Framework Usage in Components
+
+### Pub/Sub Messaging
+```js
+// In any component — decouple communication
+import messages from '@framework/messages/messages';
+
+// Publish after state change
+messages.publish('itemAdded', { id: 123 });
+
+// Subscribe to react
+const unsub = messages.subscribe('itemAdded', (msg, data) => {
+  refreshList();
+});
+```
+
+### Modal
+```js
+// In any component — show a modal
+import modal from '@framework/modal/modal';
+
+modal.open({ title: 'Confirm', content: '<p>Are you sure?</p>' });
+modal.close();
+```
+
+### Theme
+```js
+// In settings component
+import scheme from '@framework/scheme/scheme';
+
+scheme.setScheme('light');    // 'dark' | 'light' | 'system'
+scheme.setTheme('ocean');     // custom theme name
+```
+
+---
+
 ## Rules (enforced)
 
-1. **Named exports only** — `export function render[Name]`, never `export default`
-2. **Sync render** — render functions never `async`. Data comes from services before render.
-3. **Scoped queries** — `container.querySelector()`, never `document.querySelector()`
-4. **`?raw` imports** — all `.hbs` imports use `?raw` suffix
-5. **No cross-component imports** — components import from services and utils only
-6. **Layout hierarchy** — Layout → Header/Body/Footer. Features live inside Body.
-7. **Three files always** — `.hbs` + `.js` + `.css`. No component without all three.
-8. **Self-documenting headers** — every file starts with a comment explaining its role and how to modify it
+1. **Flat structure** — all components under `src/components/`, no nesting subdirs
+2. **Named exports only** — `export function render[Name]`, never `export default`
+3. **Sync render** — render functions never `async`. Data comes from services.
+4. **Scoped queries** — `container.querySelector()`, never `document.querySelector()`
+5. **`?raw` imports** — all `.hbs` imports use `?raw` suffix
+6. **No cross-component imports** — use messages.js pub/sub instead
+7. **Layout hierarchy** — Layout → Header/Body/Footer. Features inside Body.
+8. **Three files always** — `.hbs` + `.js` + `.css`. No component without all three.
+9. **Path aliases** — use `@components`, `@services`, `@framework` for cross-directory imports
+10. **Double-underscore classes** — `.__componentName` for CSS scoping
 
 ---
 
@@ -193,5 +247,5 @@ renderLayout(root, { title: 'App Name' });
 3. Import + call from Body.js
 4. Add a mount slot in Body.hbs
 
-No registration. No build config changes. That's it.
+No registration. No build config changes.
 ```

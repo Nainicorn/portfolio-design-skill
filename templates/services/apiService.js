@@ -28,9 +28,37 @@ async function request(method, path, body = null) {
   }
 }
 
+// Streaming fetch — reads chunked responses and calls onChunk with each piece.
+// Use for SSE, LLM streaming, or any chunked endpoint.
+async function stream(path, body, onChunk) {
+  const res = await fetch(`${BASE_URL}${path}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    throw new Error(
+      `Stream error: POST ${path} returned ${res.status}.\n` +
+      `Check your backend is running at ${BASE_URL}.`
+    );
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder('utf-8');
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    const chunk = decoder.decode(value, { stream: true });
+    if (onChunk) onChunk(chunk);
+  }
+}
+
 export const api = {
-  get:    (path)       => request('GET',    path),
-  post:   (path, body) => request('POST',   path, body),
-  put:    (path, body) => request('PUT',    path, body),
-  delete: (path)       => request('DELETE', path),
+  get:    (path)              => request('GET',    path),
+  post:   (path, body)       => request('POST',   path, body),
+  put:    (path, body)       => request('PUT',    path, body),
+  delete: (path)              => request('DELETE', path),
+  stream: (path, body, onChunk) => stream(path, body, onChunk),
 };

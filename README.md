@@ -2,13 +2,12 @@
 
 > Scaffold a vanilla JS + Handlebars + Native CSS frontend with layout-first architecture — no frameworks, no bloat, no generic AI templates.
 
-**Claude Code skill** that generates opinionated, production-ready frontend projects from 3 questions.
+**Claude Code skill** that generates structured, production-ready frontend projects from a few questions.
 
 ---
 
 ## Install
 
-In Claude Code, run:
 ```
 /plugin marketplace add nainicorn/vanilla-scaffold
 /plugin install vanilla-scaffold
@@ -24,29 +23,21 @@ bash ~/.claude/skills/vanilla-scaffold/scripts/setup.sh
 
 ## Usage
 
-In Claude Code, run:
+In Claude Code (VS Code extension or CLI):
 
 ```
 /vanilla-scaffold
 ```
 
-The skill walks you through 3 questions:
-1. **What are you building?** (portfolio, SaaS, fintech, etc.)
-2. **What's the vibe?** (editorial, brutalist, glassy, etc.)
-3. **Motion or 3D?** (none, GSAP, Three.js, etc.)
+Or just describe what you want to build — the skill triggers automatically.
 
-Then it generates a **design decision document** with typography, colors, spacing, and layout direction — all tailored to your answers. Review it, say "yes", and the scaffold generates.
+The skill asks a few questions about your app type, vibe, and motion preferences, then generates the full project.
 
 ```
-✅ Scaffold complete — 24 files created
-
-To get started:
-  cd your-app-name
-  npm install
-  npm run dev
+npm install && npm run dev
 ```
 
-Zero extra steps. Works on first run.
+Works on first try. Zero extra steps.
 
 ---
 
@@ -55,37 +46,50 @@ Zero extra steps. Works on first run.
 ```
 your-app/
 ├── index.html
-├── vite.config.js
+├── vite.config.js               ← path aliases (@components, @services, @framework)
 ├── package.json
 ├── .env.example
 ├── src/
-│   ├── app.js
+│   ├── app.js                   ← entry point, inits framework + mounts Layout
 │   ├── styles/
-│   │   └── base.css              ← design tokens
-│   ├── components/
-│   │   ├── Layout/               ← shell (Header + Body + Footer)
-│   │   ├── Header/               ← .hbs + .js + .css
+│   │   └── base.css             ← reset, typography, spacing tokens
+│   ├── framework/
+│   │   ├── messages/
+│   │   │   └── messages.js      ← pub/sub (BroadcastChannel)
+│   │   ├── scheme/
+│   │   │   ├── scheme.js        ← dark/light/system themes
+│   │   │   └── scheme.css       ← HSL-derived color system
+│   │   └── modal/
+│   │       ├── modal.js         ← reusable modal (open/close/escape)
+│   │       ├── modal.hbs
+│   │       └── modal.css
+│   ├── components/              ← flat structure, no nesting
+│   │   ├── Layout/              ← shell (Header + Body + Footer)
+│   │   ├── Header/              ← .hbs + .js + .css
 │   │   ├── Body/
 │   │   ├── Footer/
-│   │   └── YourFeature/          ← your components go here
+│   │   └── YourFeature/         ← your components go here
 │   ├── services/
-│   │   ├── apiService.js         ← fetch wrapper, any backend
-│   │   └── routeService.js       ← hash-based routing
-│   └── lib/                      ← motion library init (if selected)
+│   │   ├── apiService.js        ← fetch wrapper + streaming
+│   │   └── routeService.js      ← hash-based routing
+│   └── lib/                     ← motion library init (if selected)
 ```
 
-Every component = 3 files: `.hbs` (markup) + `.js` (logic) + `.css` (styles). No exceptions.
+Every component = 3 files: `.hbs` (markup) + `.js` (logic) + `.css` (styles).
 
 ---
 
 ## Architecture
 
 - **Layout-first**: Layout.js owns the shell. Features live inside Body.
+- **Flat components**: All under `src/components/` — no subdirectories.
+- **Framework layer**: Pub/sub messaging, theme system, reusable modal — all initialized at app start.
 - **Native CSS nesting**: No SCSS, no preprocessors. `& .child {}` everywhere.
-- **Custom properties only**: All colors, fonts, spacing from `:root` tokens.
+- **HSL color system**: All colors derived from hue + saturation. Dark/light handled automatically.
+- **Path aliases**: `@components`, `@services`, `@framework` — no fragile relative paths.
 - **Scoped queries**: `container.querySelector()`, never `document.querySelector()`.
 - **Sync renders**: Components render synchronously. Data fetching is a service concern.
-- **Backend-flexible**: Change `VITE_API_URL` in `.env` to point at any backend.
+- **Backend-flexible**: Change `VITE_API_URL` in `.env` or use Vite proxy. Streaming support built in.
 
 ---
 
@@ -97,6 +101,7 @@ Every component = 3 files: `.hbs` (markup) + `.js` (logic) + `.css` (styles). No
 | Hash-based routing | In `routeService.js`: `hashchange` → `popstate`, `location.hash` → `location.pathname` |
 | Vite | Any ESM bundler works — Parcel, Rollup, esbuild. Swap `vite.config.js`. |
 | `VITE_API_URL` env var | Hardcode `BASE_URL` in `apiService.js` if you don't need env management |
+| HSL color system | Replace scheme.css variables with hex values if you prefer static colors |
 
 ---
 
@@ -109,17 +114,6 @@ Every component = 3 files: `.hbs` (markup) + `.js` (logic) + `.css` (styles). No
 4. Add a mount slot in Body.hbs
 
 No registration. No build config changes.
-```
-
----
-
-## Adding a Service
-
-```
-1. Create src/services/yourService.js
-2. Named exports only — no default exports
-3. Import directly into any component that needs it
-4. Never import one service from another — keep them flat
 ```
 
 ---
@@ -137,7 +131,7 @@ No registration. No build config changes.
 ## Requirements
 
 - Node.js 18+
-- Claude Code CLI
+- Claude Code
 
 ---
 

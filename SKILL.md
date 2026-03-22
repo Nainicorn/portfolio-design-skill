@@ -1,18 +1,33 @@
 ---
 name: vanilla-scaffold
-description: "Scaffold a vanilla JS + Handlebars + Native CSS frontend using a layout-first architecture with per-component file separation (.hbs/.js/.css), an opinionated design system generated from 3 intake questions, and native CSS nesting enforced via LSP."
+description: "Scaffold a vanilla JS + Handlebars + Native CSS frontend with layout-first architecture, per-component file separation (.hbs/.js/.css), built-in pub/sub messaging, theme system, modal framework, and backend-ready service layer. Generates clean, structured projects from intake questions — not a design tool, a codebase architect."
 ---
 
 # vanilla-scaffold
 
 > Stack: Vanilla JS (ESModules) + Handlebars + Native CSS + Vite
 > Brand: `if-it-ain't-broke`
+> Focus: **Structure and architecture** — give someone the exact layout and codebase they need.
+
+---
+
+## What This Skill Does
+
+Generates a production-ready vanilla frontend with:
+- Layout-first component architecture (Layout → Header / Body / Footer)
+- Per-component file separation (.hbs / .js / .css)
+- Framework layer: pub/sub messaging, dark/light theme system, reusable modal
+- Backend-flexible service layer with streaming support
+- Path aliases (@components, @services, @framework)
+- Native CSS nesting with HSL-based color derivation
+
+This is a **structure tool**, not a design tool. It gives you clean architecture with sensible defaults. The user's CLAUDE.md or description drives the specifics.
 
 ---
 
 ## Behavior — Three Phases
 
-### Phase 1: Context Intake (3 questions, no more)
+### Phase 1: Context Intake
 
 Use the `AskUserQuestion` tool to present all 3 questions as interactive selections in a single call.
 Do not use plain text for these questions — always use the tool so the user gets clickable options.
@@ -53,71 +68,47 @@ Options:
 - **I'll describe it** — "Let me give you more detail about what I need"
 - **Nope, that's it** — "Proceed with what you have"
 
-If the user selects "I have a CLAUDE.md", read it before proceeding.
-If the user selects "I'll describe it", wait for their input.
+If the user selects "I have a CLAUDE.md", read it before proceeding — this is critical context.
+If the user selects "I'll describe it", wait for their input. This may include specifics about
+their domain, features, backend stack, or preferences that override defaults.
 
 Then ask for the **app name** in a follow-up text message.
 Do not proceed to Phase 2 until all selections + any extra context + app name are collected.
 
-### Phase 1.5: Domain Research (required before Phase 2)
-
-Before generating the design doc, **research the user's specific domain**.
-Use web search to look up real apps in the user's space (fintech, space tech, crim tech, health tech, etc.) and study:
-- What UI patterns are standard in that industry
-- What visual language users of those apps expect
-- What makes the best apps in that niche feel professional
-
-This research informs every design decision in Phase 2. The design doc should feel like it was made by someone who understands the domain, not a generic template.
-Be concise — research is for informing decisions, not for showing the user what you found.
-
 ---
 
-### Phase 2: Design Decision Document (required, before any code)
+### Phase 2: Scaffold Plan (required, before any code)
 
-After intake, output a design decision doc in this exact format:
+After intake, output a scaffold plan. This is NOT a heavy design document — it's a brief
+summary of what will be generated so the user can course-correct before files are created.
 
 ```
-## Design Decisions — [App Name]
+## Scaffold Plan — [App Name]
 
 **App type:** [answer]
-**Vibe:** [answer]
+**Vibe direction:** [answer — this sets the default theme hue/saturation in scheme.css]
+
+### Structure
+- Components: Layout, Header, Body, Footer + [any additional based on app type]
+- Services: apiService, routeService + [any additional based on context]
+- Framework: messages (pub/sub), scheme (dark/light themes), modal
 
 ### Typography
-- Display font: [specific font + why — never Inter, Roboto, Arial, Space Grotesk]
-- Body font: [specific font + why]
-- Scale: --text-xs through --text-5xl as CSS custom properties
+- Display font: [specific font — never Inter, Roboto, Arial, Space Grotesk]
+- Body font: [specific font]
 
-### Color System (all as CSS custom properties on :root)
-- --color-primary: [hex + rationale]
-- --color-surface: [hex]
-- --color-accent: [hex]
-- --color-muted: [hex]
-- --color-error: [hex]
-- --color-text: [hex]
-- --color-bg: [hex]
+### Color Tokens
+- HSL base: --hue: [value], --saturation: [value]
+- Scheme: [dark default / light default / both]
 
-### Spacing Scale
-- --space-1 through --space-8 (base: 4px)
+### Motion
+- [what gets animated, when, how — or "CSS transitions only"]
 
-### Layout Direction
-- [describe the structural pattern: asymmetric / centered / grid-breaking / etc.]
-
-### Motion Plan
-- [what gets animated, when, how — or explicitly "none"]
-
-### Libraries
-- [only if selected in question 3 — include exact npm install command]
-
-### Banned in this project
-- No purple gradients
-- No blue CTA on white
-- No Inter / Roboto / Arial / Space Grotesk
-- No flat CSS selectors (always nest with &)
-- No SCSS or preprocessor syntax
-- No hardcoded hex values outside :root
+### Additional Libraries
+- [only if selected — include exact npm install command]
 ```
 
-**Hard stop after Phase 2.** Output the design doc then output this line verbatim and wait:
+**Hard stop after Phase 2.** Output the plan then output this line verbatim and wait:
 
 > **Reply "yes" to generate the scaffold, or describe what you want changed.**
 
@@ -130,6 +121,40 @@ Silence, a slow response, or an unrelated message is not confirmation.
 
 Run `scripts/scaffold.py` with the app name as argument. Then generate all component files per `references/component-conventions.md`.
 
+The generated project structure:
+
+```
+[app-name]/
+├── index.html
+├── vite.config.js              ← path aliases (@components, @services, @framework)
+├── package.json
+├── .env.example
+├── src/
+│   ├── app.js                  ← entry point, inits framework + mounts Layout
+│   ├── styles/
+│   │   └── base.css            ← reset, typography scale, spacing tokens
+│   ├── framework/
+│   │   ├── messages/
+│   │   │   └── messages.js     ← BroadcastChannel pub/sub
+│   │   ├── scheme/
+│   │   │   ├── scheme.js       ← dark/light/system + custom themes
+│   │   │   └── scheme.css      ← HSL-derived color system
+│   │   └── modal/
+│   │       ├── modal.js        ← open/close, backdrop, Escape key
+│   │       ├── modal.hbs
+│   │       └── modal.css
+│   ├── components/             ← flat structure, no subdirs
+│   │   ├── Layout/             ← shell (mounts Header + Body + Footer)
+│   │   ├── Header/             ← .hbs + .js + .css
+│   │   ├── Body/
+│   │   ├── Footer/
+│   │   └── [Feature]/          ← user's feature components go here
+│   ├── services/
+│   │   ├── apiService.js       ← fetch wrapper + streaming support
+│   │   └── routeService.js     ← hash-based routing
+│   └── lib/                    ← motion library init (if selected)
+```
+
 The scaffold script must:
 - Print each file as it's created (`✓ Created src/components/Header/Header.js`)
 - Exit with a clear error if the target directory already exists — tell the user to pass `--force` or pick a new name
@@ -139,65 +164,61 @@ The scaffold script must:
 ✅ Scaffold complete — [N] files created
 
 To get started:
-  cd your-app-name
+  cd [app-name]
   npm install
   npm run dev
 
 Your app opens at http://localhost:5173
-Edit src/components/ to build your first page.
 ```
 
-After generation, run LSP validation on all .css files. Fix any violations before declaring done:
-
-```
-⚠️  LSP found [N] CSS issues — fixing before handoff:
-  src/components/Header/Header.css:14 — flat selector detected
-  src/components/MainPage/MainPage.css:8 — hardcoded color value
-✓  Fixed. All CSS passes LSP validation.
-```
+After generation, run LSP validation on all .css files. Fix any violations before declaring done.
 
 ---
 
 ## Non-Negotiables
 
-### CSS / Architecture
-1. Native CSS nesting always. Flat selectors are a build error.
-2. All values via custom properties. No hardcoded hex or px outside `:root`.
-3. No SCSS. No preprocessors. Ever.
-4. Design decision doc before any code. No exceptions.
-5. Service layer is the only thing that touches fetch/storage/auth/routing.
-6. Components never import from other components. Only from services and utils.
-7. Layout owns the shell. Features live in Body children.
-8. LSP validation runs after CSS generation. Fix diagnostics before done.
+### Architecture
+1. Flat component structure. All components under `src/components/` — no `layout/` or `features/` subdirs.
+2. Layout owns the shell. Features render inside Body.
+3. Service layer is the only thing that touches fetch/storage/auth/routing.
+4. Components never import from other components. Only from services, framework, and lib.
+5. Framework modules (messages, scheme, modal) are initialized in app.js, used everywhere.
+6. Path aliases (@components, @services, @framework) — no fragile relative paths across directories.
+
+### CSS
+7. Native CSS nesting always. Flat selectors are a build error.
+8. All values via custom properties. No hardcoded hex or px outside `:root` / scheme.css.
+9. No SCSS. No preprocessors. Ever.
+10. HSL-based color system — scheme.css derives all colors from --hue, --saturation, --lightness.
 
 ### JavaScript
-9. Always scope `querySelector` to the `container` argument, never `document`.
-10. Always use `?raw` on `.hbs` imports.
-11. Always named exports from components. No default exports.
-12. Render functions are synchronous. Data fetching is a service concern.
-13. Motion library init lives in `src/lib/`. Components never import libraries directly.
+11. Always scope `querySelector` to the component's element or container argument, never `document`.
+12. Always use `?raw` on `.hbs` imports (or Handlebars Vite plugin if configured).
+13. Always named exports from components. No default exports (except framework singletons).
+14. Render functions are synchronous. Data fetching is a service concern.
+15. Motion library init lives in `src/lib/`. Components never import libraries directly.
+16. Cross-component communication via messages.js pub/sub — never direct imports between components.
 
 ### UI Quality
-14. Zero rogue margins or padding. The base reset kills all browser defaults — if spacing appears, it was intentional via tokens.
-15. Every element is explicitly spaced with spacing tokens. No magic numbers, no "looks about right" — use `--space-*` variables.
-16. Alignment is pixel-perfect. Headers align with body content. Grid items align with each other. Nothing floats randomly.
-17. Typography hierarchy is visually obvious. Display → heading → body → caption must have clear size and weight contrast.
-18. Interactive elements (buttons, links, inputs) have visible focus states, hover states, and adequate touch targets (min 44px).
-19. Layout fills the viewport cleanly — no orphaned whitespace at the bottom, no horizontal overflow, no content that stops mid-screen.
+17. Zero rogue margins or padding. The base reset kills all browser defaults — if spacing appears, it was intentional via tokens.
+18. Every element is explicitly spaced with spacing tokens. No magic numbers — use `--space-*` variables.
+19. Alignment is consistent. Header, body, and footer content share the same horizontal gutter.
+20. Typography hierarchy is visually obvious. Display → heading → body → caption with clear size/weight contrast.
+21. Interactive elements have visible focus states, hover states, and min 44px touch targets.
+22. Layout fills the viewport cleanly — no orphaned whitespace, no horizontal overflow.
 
 ### Developer Experience
-20. Every script is idempotent. Running setup twice must not break anything.
-21. Every error message includes what failed AND what to do next. No silent failures.
-22. Scaffold output is `npm install && npm run dev` runnable with zero extra steps.
-23. Generated comments explain *why*, not *what*. Architecture over annotation.
-24. Escape hatches are documented. If a user wants to deviate, they know exactly where.
+23. Every script is idempotent. Running setup twice must not break anything.
+24. Every error message includes what failed AND what to do next. No silent failures.
+25. Scaffold output is `npm install && npm run dev` runnable with zero extra steps.
+26. Generated comments explain *why*, not *what*. Architecture over annotation.
 
 ---
 
 ## File References
 
 - `references/css-modern-spec.md` — native nesting, container queries, custom properties
-- `references/design-system.md` — banned patterns, font rules, color conventions
+- `references/design-system.md` — banned patterns, font rules, color conventions, spacing/alignment rules
 - `references/app-type-map.md` — app type + vibe → library + color direction
 - `references/component-conventions.md` — .hbs/.js/.css pattern with examples
-- `templates/` — all scaffold file templates
+- `templates/` — all scaffold file templates including framework/
